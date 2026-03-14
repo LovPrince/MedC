@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedC - Healthcare Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --primary-light: #e7f1ff;
+            --secondary: #198754;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #0b5ed7;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Hero Setup */
+        .hero {
+            margin-top: 70px;
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Two Column Layout */
+        .flex-row {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .flex-col {
+            flex: 1;
+        }
+
+        .img-fluid {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+        }
+
+        /* Features List */
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .feature-list i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Step Process */
+        .step-card {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+
+        /* Doctor / Testimonial / FAQ */
+        .doc-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #e9ecef;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #adb5bd;
+        }
+
+        .specialty {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .testimonial blockquote {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            padding: 20px;
+        }
+
+        .faq-item summary {
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item summary::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-item p {
+            margin-top: 15px;
+            color: var(--text-muted);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer p {
+            color: #adb5bd;
+        }
+
+        .footer h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer ul a {
+            color: #adb5bd;
+            transition: 0.3s;
+        }
+
+        .footer ul a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6c757d;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .flex-row {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                padding-right: 0;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.25s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 390px;
+            position: relative;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+            animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92) translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Close */
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #e0ddd8;
+            background: #f4f2ef;
+            cursor: pointer;
+            font-size: 14px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            background: #ebe8e3;
+        }
+
+        /* Brand */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.75rem;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        /* Heading */
+        .modal h2 {
+            font-size: 26px;
+            font-weight: 400;
+            color: #1a1a1a;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .modal h2 em {
+            font-style: italic;
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Google button */
+        .google-btn {
+            width: 100%;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1a1a;
+            transition: all 0.15s;
+            margin-bottom: 1.25rem;
+        }
+
+        .google-btn:hover {
+            background: #f9f9f9;
+            border-color: #bbb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .google-btn:active {
+            transform: scale(0.98);
+            box-shadow: none;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.25rem;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #ebebeb;
+        }
+
+        .divider-text {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* Fields */
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .field input {
+            width: 100%;
+            height: 42px;
+            border-radius: 8px;
+            border: 1px solid #e0ddd8;
+            background: #faf9f8;
+            font-family: inherit;
+            font-size: 14px;
+            color: #1a1a1a;
+            padding: 0 12px;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+        }
+
+        .field input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+            background: #fff;
+        }
+
+        .field input::placeholder {
+            color: #bbb;
+        }
+
+        /* Forgot */
+        .forgot {
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 18px;
+        }
+
+        .forgot a {
+            font-size: 12px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .forgot a:hover {
+            text-decoration: underline;
+        }
+
+        /* Submit */
+        .submit-btn {
+            width: 100%;
+            height: 44px;
+            border-radius: 10px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .submit-btn:hover {
+            background: #0b5ed7;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(13, 110, 253, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+            box-shadow: none;
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            text-align: center;
+            margin-top: 1.25rem;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .modal-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .modal-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border: 1px solid #e0ddd8;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-size: 13px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s, transform 0.25s;
+            transform: translateX(-50%) translateY(-8px);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1D9E75;
+            flex-shrink: 0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Tab switcher */
+        .tabs {
+            display: flex;
+            background: #f4f2ef;
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 7px;
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: #fff;
+            color: #1a1a1a;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Feedback message */
+        .feedback {
+            font-size: 13px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            display: none;
+        }
+
+        .feedback.error {
+            display: block;
+            color: #a32d2d;
+            background: #fcebeb;
+        }
+
+        .feedback.success {
+            display: block;
+            color: #0f6e56;
+            background: #e1f5ee;
+        }
+
+        /* Confirm password field (signup only) */
+        #confirmField.hidden {
+            display: none !important;
+        }
+
+        #forgotWrap.hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. Navigation & Home -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Med<span>C</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#doctors">Doctors</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#login" id="openBtn" class="btn btn-outline"
+                    style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-brands fa-google" style="color: #ea4335;"></i> Login
+                </a>
+                <a href="#contact" class="btn btn-primary">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero container">
+        <div class="hero-content">
+            <h1>Healthcare from the comfort of your home</h1>
+            <p>Experience quick booking, access trusted doctors, and manage your health seamlessly with MedC digital
+                healthcare platform.</p>
+            <div class="hero-btns">
+                <a href="#doctors" class="btn btn-primary">Find a Doctor</a>
+                <a href="#about" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173ff9e5eb3?auto=format&fit=crop&w=800&q=80"
+                alt="MedC Healthcare App UI/UX Mockup" class="img-fluid">
+        </div>
+    </header>
+
+    <!-- 2. About Us & 3. Vision & Mission -->
+    <section id="about" class="section">
+        <div class="container flex-row">
+            <div class="flex-col">
+                <img src="https://images.unsplash.com/photo-1551076805-e18690c5e531?auto=format&fit=crop&w=600&q=80"
+                    alt="Doctors analyzing medical records" class="img-fluid">
+            </div>
+            <div class="flex-col">
+                <div class="section-title" style="text-align: left;">
+                    <h2>About Us</h2>
+                    <p>What MedC is and why we were created.</p>
+                </div>
+                <p style="margin-bottom: 20px;">MedC is a premier digital healthcare platform designed to seamlessly
+                    connect patients with medical professionals. We focus on providing fast, reliable, and accessible
+                    healthcare to everyone.</p>
+                <div class="grid-3" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="card" style="padding: 20px;">
+                        <i class="fa-solid fa-eye"
+                            style="color:var(--primary); font-size: 1.5rem; margin-bottom: 15px;"></i>
+                        <h4>Our Vision</h4>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">To innovate and be the most accessible digital
+                            healthcare partner globally.</p>
+                    </div>
+                    <div class="card" style="padding: 20px;">
+                        <i class="fa-solid fa-bullseye"
+                            style="color:var(--primary); font-size: 1.5rem; margin-bottom: 15px;"></i>
+                        <h4>Our Mission</h4>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">Improving healthcare access by seamlessly
+                            connecting patients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Services -->
+    <section id="services" class="section" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive healthcare solutions at your fingertips</p>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-laptop-medical"></i></div>
+                    <h3>Online Consultations</h3>
+                    <p>Connect with expert doctors from your home via video or chat.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <h3>Appointment Booking</h3>
+                    <p>Schedule in-clinic visits fast and without the usual wait times.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-file-prescription"></i></div>
+                    <h3>Digital Prescriptions</h3>
+                    <p>Receive, store, and order medicines directly from digital scripts.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-notes-medical"></i></div>
+                    <h3>Health Records</h3>
+                    <p>Securely manage and share your entire medical history.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Features -->
+    <section id="features" class="section">
+        <div class="container flex-row" style="flex-direction: row-reverse;">
+            <div class="flex-col" style="text-align: center;">
+                <img src="https://images.unsplash.com/photo-1582717011986-1ebbed6f9eb8?auto=format&fit=crop&w=400&q=80"
+                    alt="MedC App Interface" class="img-fluid" style="width: auto; height: 500px; object-fit: cover;">
+            </div>
+            <div class="flex-col">
+                <div class="section-title" style="text-align: left;">
+                    <h2>Premium Features</h2>
+                    <p>Why people trust MedC for their health</p>
+                </div>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>Easy Appointments:</strong> Book instantly with
+                        real-time availability.</li>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>Verified Doctors:</strong> Top-rated, certified
+                        medical professionals.</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> <strong>Secure Records:</strong> Bank-level encryption
+                        for your medical data.</li>
+                    <li><i class="fa-solid fa-credit-card"></i> <strong>Online Payments:</strong> Fast, trackable, and
+                        secure transactions.</li>
+                    <li><i class="fa-solid fa-bell"></i> <strong>Notifications:</strong> Get timely reminders for
+                        appointments.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. How It Works -->
+    <section id="how-it-works" class="section" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Start your health journey in three simple steps</p>
+            </div>
+            <div class="grid-3" style="margin-top: 60px;">
+                <div class="card step-card">
+                    <div class="step-num">1</div>
+                    <i class="fa-solid fa-user-md"
+                        style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Search Doctor</h3>
+                    <p>Find lists of specialized doctors near you or online.</p>
+                </div>
+                <div class="card step-card">
+                    <div class="step-num">2</div>
+                    <i class="fa-regular fa-calendar-alt"
+                        style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Book Appointment</h3>
+                    <p>Select a convenient date and time to lock in your slot.</p>
+                </div>
+                <div class="card step-card">
+                    <div class="step-num">3</div>
+                    <i class="fa-solid fa-stethoscope"
+                        style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Consult & Heal</h3>
+                    <p>Consult online or visit the clinic, and start recovering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Doctors / Partners -->
+    <section id="doctors" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Network of Doctors</h2>
+                <p>Highly qualified and trusted partners</p>
+            </div>
+            <div class="grid-3">
+                <div class="card" style="text-align: center;">
+                    <div class="doc-img"><i class="fa-solid fa-user-doctor"></i></div>
+                    <h3>Dr. Sarah Jenkins</h3>
+                    <span class="specialty">Cardiologist</span>
+                    <p><i class="fa-solid fa-star" style="color: #ffc107;"></i> 4.9 (120 reviews)</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div class="doc-img"><i class="fa-solid fa-user-nurse"></i></div>
+                    <h3>Dr. Michael Chen</h3>
+                    <span class="specialty">Neurologist</span>
+                    <p><i class="fa-solid fa-star" style="color: #ffc107;"></i> 4.8 (95 reviews)</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div class="doc-img"><i class="fa-solid fa-user-doctor"></i></div>
+                    <h3>Dr. Emily Roberts</h3>
+                    <span class="specialty">Pediatrician</span>
+                    <p><i class="fa-solid fa-star" style="color: #ffc107;"></i> 5.0 (210 reviews)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Benefits & 9. Testimonials & 10. FAQ -->
+    <section id="reviews" class="section" style="background: var(--bg-light);">
+        <div class="container flex-row" style="align-items: flex-start;">
+            <div class="flex-col">
+                <div class="section-title" style="text-align: left;">
+                    <h2>Patient Testimonials</h2>
+                    <p>What our users have to say about MedC</p>
+                </div>
+                <div class="card testimonial" style="margin-bottom: 20px;">
+                    <blockquote>"MedC changed my life! Booking an appointment took less than a minute, and the online
+                        consultation was flawless."</blockquote>
+                    <p class="author">- Jane Doe</p>
+                </div>
+                <div class="card testimonial">
+                    <blockquote>"Having all my health records securely stored in one app gives me immense peace of
+                        mind."</blockquote>
+                    <p class="author">- Mark Allen</p>
+                </div>
+
+                <div class="section-title" style="text-align: left; margin-top: 50px;">
+                    <h2>Key Benefits</h2>
+                </div>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-clock"></i> Saves you valuable time</li>
+                    <li><i class="fa-solid fa-mobile-alt"></i> Convenient healthcare access anywhere</li>
+                    <li><i class="fa-solid fa-certificate"></i> Verified and trusted professionals</li>
+                </ul>
+            </div>
+
+            <div class="flex-col">
+                <div class="section-title" style="text-align: left;">
+                    <h2>FAQ</h2>
+                    <p>Common questions answered</p>
+                </div>
+                <details class="faq-item" open>
+                    <summary>How do I book an appointment?</summary>
+                    <p>Simply search for a doctor by specialty, select an available time slot, and confirm your booking
+                        securely.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Are my medical records safe?</summary>
+                    <p>Yes, MedC uses bank-level encryption (HIPAA compliant) to ensure your data is always private and
+                        secure.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I pay online for consultations?</summary>
+                    <p>Absolutely. We support multiple secure payment gateways including credit cards and digital
+                        wallets.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Contact Us -->
+    <section id="contact" class="section">
+        <div class="container flex-row">
+            <div class="flex-col">
+                <div class="section-title" style="text-align: left;">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with our support team</p>
+                </div>
+                <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 30px;">
+                    <div class="card-icon" style="margin: 0; width: 50px; height: 50px;"><i
+                            class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Phone</h4>
+                        <p style="color: var(--text-muted);">+1 (800) 123-4567</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 30px;">
+                    <div class="card-icon" style="margin: 0; width: 50px; height: 50px;"><i
+                            class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Email</h4>
+                        <p style="color: var(--text-muted);">support@medixhealth.com</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <div class="card-icon" style="margin: 0; width: 50px; height: 50px;"><i
+                            class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Address</h4>
+                        <p style="color: var(--text-muted);">123 Wellness Avenue, NY, USA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-col card">
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                    <input type="text" placeholder="Your Full Name" required>
+                    <input type="email" placeholder="Your Email Address" required>
+                    <input type="text" placeholder="Subject">
+                    <textarea rows="5" placeholder="How can we help you?" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="footer-logo">Med<span>C</span></a>
+                    <p>Redefining digital healthcare for a better, healthier tomorrow. Modern, fast, and secure.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal & Support</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#contact">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Stay Connected</h4>
+                    <p style="margin-bottom: 15px;">Subscribe to our newsletter for health tips.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Email"
+                            style="padding: 10px; border-radius: 5px; border: none; outline: none; width: 100%;">
+                        <button class="btn btn-primary" style="padding: 10px 15px;"><i
+                                class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 MedC Digital Healthcare. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-dot"></span> Redirecting to Google…
+    </div>
+
+    <!-- Overlay + Modal -->
+    <!-- Overlay + Modal -->
+    <div class="overlay hidden" id="overlay">
+        <div class="modal" id="modal">
+            <button class="close-btn" id="closeBtn">✕</button>
+
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="7" r="3" fill="white" opacity="0.9" />
+                        <path d="M4 17c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="white" stroke-width="1.5"
+                            stroke-linecap="round" opacity="0.9" />
+                    </svg>
+                </div>
+                <span class="brand-name">MedC</span>
+            </div>
+
+            <!-- Tab switcher -->
+            <div class="tabs">
+                <button class="tab-btn active" id="tabLogin">Sign in</button>
+                <button class="tab-btn" id="tabSignup">Create account</button>
+            </div>
+
+            <h2 id="modalTitle">Welcome <em>back</em></h2>
+            <p class="subtitle" id="modalSubtitle">Sign in to continue to your dashboard</p>
+
+            <button class="google-btn" id="googleBtn">
+                <svg width="18" height="18" viewBox="0 0 18 18">
+                    <path
+                        d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
+                        fill="#4285F4" />
+                    <path
+                        d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"
+                        fill="#34A853" />
+                    <path
+                        d="M3.964 10.706c-.18-.54-.282-1.117-.282-1.706s.102-1.166.282-1.706V4.962H.957C.347 6.175 0 7.55 0 9s.348 2.825.957 4.038l3.007-2.332z"
+                        fill="#FBBC05" />
+                    <path
+                        d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.962L3.964 6.294C4.672 4.169 6.656 3.58 9 3.58z"
+                        fill="#EA4335" />
+                </svg>
+                <span id="googleBtnText">Continue with Google</span>
+            </button>
+
+            <div class="divider">
+                <div class="divider-line"></div>
+                <span class="divider-text" id="dividerText">or sign in with email</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+
+            <div class="field">
+                <label for="email">Email address</label>
+                <input type="email" id="email" placeholder="you@example.com" autocomplete="email" />
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" />
+            </div>
+
+            <div class="field hidden" id="confirmField">
+                <label for="confirmPassword">Confirm password</label>
+                <input type="password" id="confirmPassword" placeholder="••••••••" />
+            </div>
+
+            <div class="forgot" id="forgotWrap">
+                <a href="#" id="forgotLink">Forgot password?</a>
+            </div>
+
+            <button class="submit-btn" id="submitBtn">Sign in</button>
+
+            <p class="modal-footer" id="footerNote">
+                No account yet? <a href="#" id="switchLink">Create one →</a>
+            </p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

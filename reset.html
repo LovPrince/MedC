@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password – MedC</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+
+        .box {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 360px;
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            color: #0d6efd;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        p {
+            margin-top: 1rem;
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>Set new password</h2>
+        <input type="password" id="newPass" placeholder="New password (min 6 chars)" minlength="6" />
+        <button onclick="updatePassword()">Update password</button>
+        <p id="msg"></p>
+    </div>
+    <script>
+        const { createClient } = supabase;
+        const _supabase = createClient(
+            'https://YOUR_PROJECT_ID.supabase.co',
+            'YOUR_ANON_KEY'
+        );
+
+        async function updatePassword() {
+            const pass = document.getElementById('newPass').value;
+            const msg = document.getElementById('msg');
+            if (pass.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; return; }
+
+            const { error } = await _supabase.auth.updateUser({ password: pass });
+            if (error) {
+                msg.style.color = '#e24b4a';
+                msg.textContent = error.message;
+            } else {
+                msg.style.color = '#1D9E75';
+                msg.textContent = 'Password updated! Redirecting…';
+                setTimeout(() => window.location.href = '/index.html', 2000);
+            }
+        }
+    </script>
+</body>
+
+</html>
